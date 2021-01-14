@@ -2,42 +2,39 @@
 
  ## usersテーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nick_name          | string | null: false |
-| email              | string | null: false |
-| password           | string | null: false |
-| last_name          | string | null: false |
-| first_name         | string | null: false |
-| last_name_kana     | string | null: false |
-| first_name_kana    | string | null: false |
-| birthday           | string | null: false |
+| Column            | Type   | Options      |
+| ------------------| ------ | ------------ |
+| nick_name         | string | null: false  |
+| email             | string | unique: true |
+| encrypted_password| string | null: false  |
+| last_name         | string | null: false  |
+| first_name        | string | null: false  |
+| last_name_kana    | string | null: false  |
+| first_name_kana   | string | null: false  |
+| birthday          | date   | null: false  |
 
 ### Association
 
 - has_many :items
-- has_many :comments
 
 
 
 ## itemsテーブル
 
-| Column          | Type        | Options                        |
-| ----------------| ----------- | ------------------------------ |
-| image           |             |                                |
-| product         | string      | null: false                    |
-| product_d       | string      | null: false                    |
-| category        | string      | null: false                    |
-| state           | string      | null: false                    |
-| delivery_fee    | string      | null: false                    |
-| delivery_source | string      | null: false                    |
-| delivery_days   | string      | null: false                    |
-| user            | references  | null: false, foreign_key: true |
+| Column             | Type         | Options                        |
+| ------------------ | ------------ | ------------------------------ |
+| product            | string       | null: false                    |
+| product_d          | string       | null: false                    |
+| category_id        | integer      | null: false                    |
+| state_id           | integer      | null: false                    |
+| delivery_fee_id    | integer      | null: false                    |
+| delivery_source_id | integer      | null: false                    |
+| delivery_day_id    | integer      | null: false                    |
+| user               | references   | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_many :comments
 
 
 
