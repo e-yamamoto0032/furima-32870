@@ -15,7 +15,10 @@
 
 ### Association
 
-- has_many :items
+- has_many :items, through:addresses
+- has_many :addresses
+- has_many :records
+
 
 
 
@@ -34,20 +37,39 @@
 
 ### Association
 
-- belongs_to :user
+- has_many :users, through:addresses
+- has_many :addresses
+- has_many :records
 
 
 
-## comments テーブル
+##  addressテーブル
 
-| Column    | Type       | Options                        |
-| --------- | ---------- | ------------------------------ |
-| text      | text       | null: false                    |
-| user      | references | null: false, foreign_key: true |
-| item      | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | -----------| ------------------------------ |
+| postcode      | integer    | null: false                    |
+| prefecture_id | integer    | null: false,                   |
+| city          | string     | null: false,                   |
+| block         | string     | null: false,                   |
+| building      | string     | null: false,                   |
+| phone_number  | integer    | null: false,                   |
+| user          | references | null: false, foreign_key: true |
+| item          | references | null: false, foreign_key: true |
+
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
 
+
+
+##  recordテーブル
+
+| user | references | null: false, foreign_key: true |
+| item | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
