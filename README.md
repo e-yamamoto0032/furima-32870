@@ -15,8 +15,7 @@
 
 ### Association
 
-- has_many :items, through:addresses
-- has_many :addresses
+- has_many :items
 - has_many :records
 
 
@@ -24,22 +23,21 @@
 
 ## itemsテーブル
 
-| Column             | Type         | Options                        |
-| ------------------ | ------------ | ------------------------------ |
-| product            | string       | null: false                    |
-| product_d          | string       | null: false                    |
-| category_id        | integer      | null: false                    |
-| state_id           | integer      | null: false                    |
-| delivery_fee_id    | integer      | null: false                    |
-| delivery_source_id | integer      | null: false                    |
-| delivery_day_id    | integer      | null: false                    |
-| price              | integer      | null: false                    |
-| user_id            | references   | null: false, foreign_key: true |
+| Column               | Type         | Options                        |
+| -------------------- | ------------ | ------------------------------ |
+| product              | string       | null: false                    |
+| product_introduction | text         | null: false                    |
+| category_id          | integer      | null: false                    |
+| state_id             | integer      | null: false                    |
+| delivery_fee_id      | integer      | null: false                    |
+| delivery_source_id   | integer      | null: false                    |
+| delivery_day_id      | integer      | null: false                    |
+| price                | integer      | null: false                    |
+| user                 | references   | null: false, foreign_key: true |
 
 ### Association
 
-- has_many :users, through:addresses
-- has_many :addresses
+- belongs_to :user
 - has_one :record
 
 
@@ -55,13 +53,11 @@
 | building      | string     |                                |
 | phone_number  | string     | null: false,                   |
 | record_id     | references | null: false, foreign_key: true |
-| item_id       | references | null: false, foreign_key: true |
 
 
 ### Association
 
 - belongs_to :record
-- belongs_to :item
 
 
 
