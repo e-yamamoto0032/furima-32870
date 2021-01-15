@@ -33,38 +33,39 @@
 | delivery_fee_id    | integer      | null: false                    |
 | delivery_source_id | integer      | null: false                    |
 | delivery_day_id    | integer      | null: false                    |
-| user               | references   | null: false, foreign_key: true |
+| price              | integer      | null: false                    |
+| user_id            | references   | null: false, foreign_key: true |
 
 ### Association
 
 - has_many :users, through:addresses
 - has_many :addresses
-- has_many :records
+- has_one :record
 
 
 
-##  addressテーブル
+##  addressesテーブル
 
 | Column        | Type       | Options                        |
 | ------------- | -----------| ------------------------------ |
-| postcode      | integer    | null: false                    |
+| postcode      | string     | null: false                    |
 | prefecture_id | integer    | null: false,                   |
 | city          | string     | null: false,                   |
 | block         | string     | null: false,                   |
-| building      | string     | null: false,                   |
-| phone_number  | integer    | null: false,                   |
-| user          | references | null: false, foreign_key: true |
-| item          | references | null: false, foreign_key: true |
+| building      | string     |                                |
+| phone_number  | string     | null: false,                   |
+| record_id     | references | null: false, foreign_key: true |
+| item_id       | references | null: false, foreign_key: true |
 
 
 ### Association
 
-- belongs_to :user
+- belongs_to :record
 - belongs_to :item
 
 
 
-##  recordテーブル
+##  recordsテーブル
 
 | user | references | null: false, foreign_key: true |
 | item | references | null: false, foreign_key: true |
@@ -73,3 +74,4 @@
 
 - belongs_to :user
 - belongs_to :item
+- has_one :address
