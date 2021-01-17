@@ -18,6 +18,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :items, dependent: :destroy
-  has_many :records, dependent: :destroy
+  #has_many :records, dependent: :destroy
 
 end
