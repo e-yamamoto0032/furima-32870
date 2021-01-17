@@ -30,11 +30,6 @@ describe 'ユーザー新規登録' do
       @user.valid?
       expect(@user.errors.full_messages).to include("Email is invalid")
     end
-    it "emailに@がないと登録できない" do
-      @user.email = "testtest"
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Email is invalid")
-    end
     it "同じemailでは登録できない" do
       @user.save!
       duplicate_user = FactoryBot.build(:user)
@@ -75,7 +70,6 @@ describe 'ユーザー新規登録' do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
-
     it "last_nameが空だと登録できない" do
       @user.last_name = ""
       @user.valid?
@@ -106,6 +100,11 @@ describe 'ユーザー新規登録' do
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name kana is invalid")
     end
+    it "last_name_kanaがカタカナ以外の全角文字だと登録できないこと" do
+      @user.last_name_kana = "あああ"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name kana is invalid")
+    end
     it "first_name_kanaが空だと登録できない" do
       @user.first_name_kana = ""
       @user.valid?
@@ -113,6 +112,11 @@ describe 'ユーザー新規登録' do
     end
     it "first_name_kanaが全角カナでないと登録できない" do
       @user.first_name_kana = "aaa"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name kana is invalid")
+    end
+    it "first_name_kanaがカタカナ以外の全角文字だと登録できないこと" do
+      @user.first_name_kana = "あああ"
       @user.valid?
       expect(@user.errors.full_messages).to include("First name kana is invalid")
     end
