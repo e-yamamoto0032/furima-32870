@@ -8,7 +8,6 @@ window.addEventListener('load', () => {
     input_price = priceInput.value
     addTax.innerHTML = input_price * 0.1
     priceProfit.innerHTML = input_price - addTax.innerHTML
-   //  console.log(priceTax.innerHTML)
-   //  console.log(priceProfit.innerHTML)
+
   })
 })
