@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
+    @records = Record.includes(:item)
   end
 
   def new
@@ -22,6 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @record = Record.find_by(item_id:@item.id)
   end
 
   def edit
