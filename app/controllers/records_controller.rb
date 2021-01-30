@@ -3,7 +3,10 @@ class RecordsController < ApplicationController
 
   def index
     @item = Item.find(params[:item_id])
+    @record = Record.find_by(item_id:@item.id)
     if current_user.id == @item.user_id
+      redirect_to root_path
+    elsif @record.present?
       redirect_to root_path
     else
       @record_address = RecordAddress.new
