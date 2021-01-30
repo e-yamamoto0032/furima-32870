@@ -1,8 +1,8 @@
 class RecordsController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item, only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @record = Record.find_by(item_id:@item.id)
     if current_user.id == @item.user_id
       redirect_to root_path
@@ -24,10 +24,8 @@ class RecordsController < ApplicationController
       card: address_params[:token], 
       currency: 'jpy'
       )
-      
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
       render :index
     end
   end
@@ -43,5 +41,9 @@ class RecordsController < ApplicationController
                                           item_id:params[:item_id],
                                           token: params[:token]
                                   )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
   end
 end

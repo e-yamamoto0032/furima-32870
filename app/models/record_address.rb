@@ -9,9 +9,11 @@ class RecordAddress
     validates :prefecture_id, numericality: { other_than: 1, message: 'Select' }
     validates :city
     validates :block
+    validates :token
+    validates :user_id
+    validates :item_id
     validates :phone_number, format: { with: /\A\d{10,11}\z/ }
   end
-    validates :token, presence: true
 
   def save
     record = Record.create(item_id: item_id, user_id: user_id)
