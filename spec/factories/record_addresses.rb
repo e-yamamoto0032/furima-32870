@@ -8,7 +8,3 @@ FactoryBot.define do
     token         { 'ENV["PAYJP_SECRET_KEY"]'}
   end
 end
-
-# スライド　option + カーソル
-# インデント　選択してからtab
-# 複製　shift + option + カーソル

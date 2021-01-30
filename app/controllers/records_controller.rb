@@ -1,8 +1,13 @@
 class RecordsController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @item = Item.find(params[:item_id])
-    @record_address = RecordAddress.new
+    if current_user.id == @item.user_id
+      redirect_to root_path
+    else
+      @record_address = RecordAddress.new
+    end
   end
 
   def create
@@ -36,5 +41,4 @@ class RecordsController < ApplicationController
                                           token: params[:token]
                                   )
   end
-
 end
