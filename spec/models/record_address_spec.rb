@@ -14,6 +14,10 @@ RSpec.describe RecordAddress, type: :model do
         @record_address.phone_number = "0901234567"
         expect(@record_address).to be_valid
       end
+      it "建物名がなくても登録できる" do
+        @record_address.building = ''
+        expect(@record_address).to be_valid
+      end
     end
     context '商品購入がうまくいかないとき' do
       it 'postcodeが空だと登録できない' do
@@ -63,6 +67,11 @@ RSpec.describe RecordAddress, type: :model do
       end
       it 'phone_numberが9桁以下だと登録できない' do
         @record_address.phone_number = '090123456'
+        @record_address.valid?
+        expect(@record_address.errors.full_messages).to include("Phone number is invalid")
+      end
+      it 'phone_numberが12桁以上だと登録できない' do
+        @record_address.phone_number = '090123456789'
         @record_address.valid?
         expect(@record_address.errors.full_messages).to include("Phone number is invalid")
       end

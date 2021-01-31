@@ -4,9 +4,7 @@ class RecordsController < ApplicationController
 
   def index
     @record = Record.find_by(item_id:@item.id)
-    if current_user.id == @item.user_id
-      redirect_to root_path
-    elsif @record.present?
+    if current_user.id == @item.user_id || @record.present?
       redirect_to root_path
     else
       @record_address = RecordAddress.new
