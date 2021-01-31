@@ -17,10 +17,9 @@ class RecordsController < ApplicationController
     @record_address = RecordAddress.new(address_params)
     if @record_address.valid?
       @record_address.save
-      item = Item.find(params[:item_id])
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
       Payjp::Charge.create(
-      amount: item[:price], 
+      amount: @item[:price], 
       card: address_params[:token], 
       currency: 'jpy'
       )
