@@ -1,5 +1,6 @@
 FactoryBot.define do
   factory :item do
+    id                   { 1 }
     product              { 'テスト' }
     product_introduction { 'テストの説明' }
     category_id          { 2 }

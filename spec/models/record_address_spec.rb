@@ -2,7 +2,12 @@ require 'rails_helper'
 
 RSpec.describe RecordAddress, type: :model do
   before do
+    @user = FactoryBot.build(:user)
+    @item = FactoryBot.build(:item)
     @record_address = FactoryBot.build(:record_address)
+    @record_address.user_id = @user.id
+    @record_address.item_id = @item.id
+    sleep 0.1
   end
 
   describe '商品購入' do
