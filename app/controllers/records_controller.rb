@@ -39,7 +39,7 @@ class RecordsController < ApplicationController
     @item = Item.find(params[:item_id])
   end
 
-  def set_payjp
+  def set_payjp #Payjpの記述
     Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
     amount: @item[:price], 
