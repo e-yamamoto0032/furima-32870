@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index,:show]
   before_action :set_item, only: [:edit, :show, :update, :destroy]
   before_action :move_to_index, only: [:edit, :update, :destroy] 
+  before_action :record_present, only: [:edit, :show] 
 
 
   def index
@@ -25,6 +26,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if @record.present?
+      redirect_to root_path
+    end
   end
 
   def update
@@ -59,5 +63,9 @@ class ItemsController < ApplicationController
       :delivery_source_id, :delivery_day_id,
       :price, :image
     ).merge(user_id: current_user.id)
+  end
+
+  def record_present
+    @record = Record.find_by(item_id:@item.id)
   end
 end
